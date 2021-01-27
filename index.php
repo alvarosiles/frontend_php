@@ -1,86 +1,101 @@
 <!DOCTYPE html>
 <html>
 
-<script>
-    window.location = "vista.php"
-</script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <body>
-    <a href="http://localhost/server_php/"></a>
-    <?php
-    echo "Hello World!";
-    ?>
 
-    <span><a style="float: right; background: rebeccapurple; color: white;" href="https://www.w3schools.com/php/php_ajax_database.asp"> w3schools </a></span>
 
+
+
+
+
+
+    <div class="container ">
+
+
+
+        <?php
+        echo "Hello World!";
+        ?>
+
+
+
+
+        <div class="row inline">
+            Id: <input id="varid" type="text" value="110">
+            User: <input id="varusername" type="text" value="marta">
+            Password: <input id="varpassword" type="text" value="1234567">
+
+            Tipo: <select id="vartipo" type="text">
+                <option>mostrar todos</option>
+                <option value="admin">admin</option>
+                <option value="vendedor">vendedor</option>
+                <option value="contador">contador</option>
+                <option value="cajero">cajero</option>
+            </select>
+
+            <button id="btn-guardar" type="button" onclick="guardar()">Guardar</button>
+            <button id="btn-actualizar" type="button" style="display: none;" onclick="actualizar()">Actulizar</button>
+
+            <br>
+            <br>
+            <hr>
+            <br>
+
+            <table id="tabla-informacion">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>user name</th>
+                        <th>password</th>
+                        <th>tipo</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
     <br>
     <br>
-    <br>
+    <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
 
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "1234567";
-    $dbname = "php";
-
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT id, username, password FROM user";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            echo "id: " . $row["id"] . " - Name: " . $row["username"] . " " . $row["password"] . "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-    ?>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-
-    <form>
-        <select name="users" onchange="showUser(this.value)">
-            <option value="">mostrar todos</option>
-            <option value="1">admin</option>
-            <option value="2">vendedor</option>
-            <option value="3">contador</option>
-            <option value="4">caja</option>
-        </select>
-    </form>
-    <br>
-    <div id="txtHint"><b>Person info will be listed here.</b></div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-    <script>
-        function showUser(str) {
-            if (str == "") {
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            }
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("txtHint").innerHTML = this.responseText;
-                }
-            }
-            xmlhttp.open("GET", "getuser.php?q=" + str, true);
-            xmlhttp.send();
-        }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="controlador.js"></script>
 
 </body>
 
